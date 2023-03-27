@@ -4,6 +4,8 @@ const connectDB = require("./db/connect");
 
 const tasksRouter = require("./routes/tasks");
 
+const errorHandler = require('./middleware/errorHandler')
+
 const app = express();
 const port = 5000;
 // middleware
@@ -11,6 +13,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 
 app.use("/api/v1/tasks", tasksRouter);
+
+
+app.use(errorHandler)
+
 
 const start = async () => {
   try {
